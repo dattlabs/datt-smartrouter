@@ -1,5 +1,5 @@
 
-package com.datt.smartrouter_test
+package com.datt.smartroutertest
 
 import akka.actor.ActorSystem
 import scala.concurrent.duration._

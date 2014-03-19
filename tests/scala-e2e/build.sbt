@@ -1,6 +1,13 @@
+
+import AssemblyKeys._
+
+assemblySettings
+
+jarName in assembly := "smartRouterTest.jar"
+
 organization := "com.datt"
 
-name := "smartrouter_test"
+name := "smartroutertest"
 
 version := "0.1.0-SNAPSHOT"
 
@@ -9,8 +16,6 @@ scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 resolvers ++= Seq(
   "spray repo" at "http://repo.spray.io"
 )
-
-seq(com.github.retronym.SbtOneJar.oneJarSettings: _*)
 
 libraryDependencies ++= {
   val akkaV = "2.1.4"
