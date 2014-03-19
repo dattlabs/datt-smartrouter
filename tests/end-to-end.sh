@@ -5,7 +5,7 @@
   sbt compile
   popd
 
-  run bash -c "java -jar ./scala-e2e/target/scala-2.10/smartRouterTest.jar"
+  run bash -c "java -jar ./scala-e2e/target/scala-2.10/smartRouterTest.jar" # TODO pass hostnanme:port for nginx
 
   echo "output: "$output
   echo "status: "$status
