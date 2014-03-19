@@ -1,6 +1,6 @@
 organization := "com.datt"
 
-name := "smartrouter-test"
+name := "smartrouter_test"
 
 version := "0.1.0-SNAPSHOT"
 
