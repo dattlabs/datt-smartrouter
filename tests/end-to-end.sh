@@ -5,7 +5,7 @@
   sbt compile
   popd
 
-  run bash -c "./scala-e2e/target/..." # TODO : fill out rest of path
+  run bash -c "java -jar ./scala-e2e/target/scala-2.10/smartRouterTest.jar"
 
   echo "output: "$output
   echo "status: "$status
