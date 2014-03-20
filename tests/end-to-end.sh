@@ -5,7 +5,7 @@ setup() {
   sbt package
   popd
 
-  pushd ../datt-sampleapp
+  pushd ../../datt-sampleapp
   sbt "run 8080"
   popd
 }
