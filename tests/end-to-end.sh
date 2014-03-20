@@ -1,11 +1,17 @@
 #!/usr/bin/env bats
 
-@test "requests from same client are routed to a single server" {
+setup() {
   pushd ./scala-e2e
   sbt package
   popd
 
-  run bash -c "java -jar ./scala-e2e/target/scala-2.10/smartRouterTest.jar" # TODO pass hostnanme:port for nginx
+  pushd ../datt-sampleapp
+  sbt "run 8080"
+  popd
+}
+
+@test "requests from same client are routed to a single server" {
+  run bash -c "java -jar ./scala-e2e/target/scala-2.10/smartRouterTest.jar localhost:8080"
 
   echo "output: "$output
   echo "status: "$status
