@@ -34,15 +34,18 @@ object Main {
 
   private def issueRequest(client: Integer, hostname: String, port: Integer, req: HttpRequest): Future[HttpResponse] = {
     implicit val timeout = Timeout.durationToTimeout(timeoutDuration)
-    val pipeline = (for (
+    val connectedSendReceive = for {
       Http.HostConnectorInfo(connector, _) <-
-      IO(Http) ? Http.HostConnectorSetup(hostname, port = port)
-    ) yield sendReceive(connector)).map(
+        IO(Http) ? Http.HostConnectorSetup(hostname, port = port)
+    } yield sendReceive(connector)
+
+    val pipeline = for (sendRecv <- connectedSendReceive) yield
         addHeader("Accept", "application/json") ~>
         withCookies(client)                     ~>
-        _                                       ~>
+        sendRecv                                ~>
         storeCookies(client)                    ~>
-        unmarshal[HttpResponse])
+        unmarshal[HttpResponse]
+
     pipeline.flatMap(_(req))
   }
 
