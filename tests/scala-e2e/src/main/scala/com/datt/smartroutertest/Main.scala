@@ -26,7 +26,7 @@ object Main {
   val cookies = mutable.Map[Integer, List[HttpCookie]]().withDefaultValue(List())
 
   private def withCookies(client: Integer): HttpRequest => HttpRequest =
-    addHeader(HttpHeaders.Cookie(cookies(client)))
+    if (cookies(client).size > 0) addHeader(HttpHeaders.Cookie(cookies(client))) else identity
 
   def extractCookies(res: HttpResponse) = res.headers.collect { case `Set-Cookie`(hc) => hc }
   private def storeCookies(client: Integer): Future[HttpResponse] => Future[HttpResponse] =
