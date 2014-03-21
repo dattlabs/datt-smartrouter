@@ -2,7 +2,7 @@
 load helpers
 
 setup() {
-  run_dir "./scala-e2e" "sbt package"
+  run_dir "./scala-e2e" "sbt assembly"
 }
 
 @test "requests from same client are routed to a single server" {
