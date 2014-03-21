@@ -1,20 +1,16 @@
-#!/usr/bin/env bats
+#!/bin/bash
 
-setup() {
-  pushd ./scala-e2e
-  sbt package
-  popd
+set -x
 
-  pushd ../../datt-sampleapp
-  sbt "run 8080"
-  popd
-}
+. ./helpers.bash
 
-@test "requests from same client are routed to a single server" {
-  run bash -c "java -jar ./scala-e2e/target/scala-2.10/smartRouterTest.jar localhost:8080"
+run_sbt='sbt "run 8080"'
+run_dir_bkg "../../datt-sampleapp" "$run_sbt"
 
-  echo "output: "$output
-  echo "status: "$status
-  [ "$status" -eq 0 ]
-  [ "$output" -ne 0 ]
-}
+sleep 5
+
+java -jar ./scala-e2e/target/scala-2.10/smartRouterTest.jar localhost:8080
+exitCode=$?
+
+kill -9 %+
+exit $exitCode
