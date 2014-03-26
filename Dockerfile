@@ -12,3 +12,5 @@ RUN `# disable default nginx site`; \
 ADD files/sampleapp.conf /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/sampleapp.conf /etc/nginx/sites-enabled/sampleapp.conf
 
+# Custom serf config
+ADD files/serf-scripts/ /files/
